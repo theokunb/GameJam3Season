@@ -60,7 +60,6 @@ public class DrillStatusVisitor : IInteractionStatusVisitor
 
     public void Visit(NotInteractable obj)
     {
-        Debug.Log("not need interaction");
     }
 
     public void Visit(Interactable obj)

@@ -18,7 +18,7 @@ public class SoundContainer : MonoBehaviour, IService
         Play(mainTheme, conf =>
         {
             conf.loop = true;
-            conf.volume = 0.07f;
+            conf.volume = 0.04f;
         });
     }
 

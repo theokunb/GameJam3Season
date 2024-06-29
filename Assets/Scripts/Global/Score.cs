@@ -27,7 +27,7 @@ public class Score : IInteractionVisitor, IService
 
     public Score()
     {
-        _currentScore = 0;
+        _currentScore = 0f;
     }
 
     public void Visit(AsteroidsInteraction interaction)

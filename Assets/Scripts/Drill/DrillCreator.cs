@@ -14,13 +14,14 @@ public class DrillCreator<T> : Creator<T> where T : BaseInteraction
         {
             var drill = ServiceLoacator.Instance.Get<Drill>();
             var score = ServiceLoacator.Instance.Get<Score>();
-            var interactionCompleteVisitor = ServiceLoacator.Instance.Get<InteractionCompleteVisitor>();
+            var interactionCompleteVisitor = ServiceLoacator.Instance.Get<InteractionCompleteVisitor>(); 
+            var windowController = ServiceLoacator.Instance.Get<WindowController>();
+
+            windowController.Pop();
 
             drill.SetStatus(InteractionStatusType.NotInteractable);
             CurrentInteraction.Accept(score);
             CurrentInteraction.Accept(interactionCompleteVisitor);
-
-            HideInteraction();
         });
     }
 

@@ -17,12 +17,13 @@ public class TerminalCreator<T> : Creator<T> where T : BaseInteraction
             var terminal = ServiceLoacator.Instance.Get<Terminal>();
             var score = ServiceLoacator.Instance.Get<Score>();
             var interactionCompleteVisitor = ServiceLoacator.Instance.Get<InteractionCompleteVisitor>();
+            var windowController = ServiceLoacator.Instance.Get<WindowController>();
+
+            windowController.Pop();
 
             terminal.SetStatus(InteractionStatusType.NotInteractable);
             CurrentInteraction.Accept(score);
             CurrentInteraction.Accept(interactionCompleteVisitor);
-
-            HideInteraction();
         });
     }
     protected override void OnHiding()

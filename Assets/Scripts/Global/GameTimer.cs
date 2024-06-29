@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameTimer : MonoBehaviour
+public class GameTimer : MonoBehaviour, IService
 {
     [SerializeField] private float _timeInSeconds;
 

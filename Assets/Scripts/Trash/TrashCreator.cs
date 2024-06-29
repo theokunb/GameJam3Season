@@ -13,12 +13,13 @@ public class TrashCreator<T> : Creator<T> where T : BaseInteraction
             var trash = ServiceLoacator.Instance.Get<Trash>();
             var score = ServiceLoacator.Instance.Get<Score>();
             var interactionCompleteVisitor = ServiceLoacator.Instance.Get<InteractionCompleteVisitor>();
-            
+            var windowController = ServiceLoacator.Instance.Get<WindowController>();
+
+            windowController.Pop();
+
             trash.SetStatus(InteractionStatusType.NotInteractable);
             CurrentInteraction.Accept(score);
             CurrentInteraction.Accept(interactionCompleteVisitor);
-
-            HideInteraction();
         });
     }
 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IService
@@ -51,5 +52,15 @@ public class Player : MonoBehaviour, IService
         {
             _spriteRenderer.flipX = true;
         }
+    }
+
+    public void SetAnimationParam(Action<Animator> action)
+    {
+        action?.Invoke(_animator);
+    }
+
+    public void ResetVelocity()
+    {
+        _rigidBody.velocity = Vector3.zero;
     }
 }

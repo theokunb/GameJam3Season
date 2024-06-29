@@ -85,11 +85,11 @@ public class UnlockDifficultVisitor<T> : Creator<T>, IUnlockDifficultVisitor whe
         {
             var currentDoor = ServiceLoacator.Instance.Get<Door>();
             var score = ServiceLoacator.Instance.Get<Score>();
+            var windowController = ServiceLoacator.Instance.Get<WindowController>();
 
-            currentDoor.SetStatus(InteractionStatusType.NotInteractable);
-            CurrentInteraction.Accept(score);
-
-            HideInteraction();
+            windowController.Pop();
+            currentDoor?.SetStatus(InteractionStatusType.NotInteractable);
+            CurrentInteraction?.Accept(score);
         });
     }
 

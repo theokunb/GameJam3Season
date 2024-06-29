@@ -74,6 +74,10 @@ public static class Constants
         public static string Sucked = Path.Combine("Sounds", "GameSounds", "trash");
         public static string AsteroidsDie = Path.Combine("Sounds", "GameSounds", "AsteroidDie");
 
+        public static string EndPhrase1 = Path.Combine("Sounds", "Dialog", "endPhrase1");
+        public static string EndPhrase2 = Path.Combine("Sounds", "Dialog", "endPhrase2");
+        public static string EndPhrase3 = Path.Combine("Sounds", "Dialog", "endPhrase3");
+
     }
 
     public static class Translations

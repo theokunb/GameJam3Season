@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameProgress : MonoBehaviour
+public class GameProgress : MonoBehaviour, IService
 {
     private Slider _slider;
     private Score _score;

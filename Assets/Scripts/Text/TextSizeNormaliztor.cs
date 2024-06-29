@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -15,15 +13,15 @@ public class TextSizeNormaliztor : MonoBehaviour
 
         var min = objects.First().fontSize;
 
-        foreach(var obj in objects)
+        foreach (var obj in objects)
         {
-            if(obj.fontSize < min)
+            if (obj.fontSize < min)
             {
                 min = obj.fontSize;
             }
         }
 
-        foreach(var obj in objects)
+        foreach (var obj in objects)
         {
             obj.enableAutoSizing = false;
             obj.fontSize = min;
