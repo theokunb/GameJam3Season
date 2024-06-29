@@ -55,6 +55,18 @@ public class Door : MonoBehaviour, IService, IInteractable
     {
         visitor.Visit(this);
     }
+
+    public void PlaySound()
+    {
+        var audioClip = Resources.Load(Constants.Sounds.DoopOpen) as AudioClip;
+        var soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+
+        soundContainer.Play(audioClip, conf =>
+        {
+            conf.loop = false;
+            conf.volume = 0.1f;
+        });
+    }
 }
 
 public class DoorExitVisitor : IInteractionStatusVisitor
@@ -73,9 +85,9 @@ public class DoorExitVisitor : IInteractionStatusVisitor
 
     public void Visit(Interactable obj)
     {
-        _animator.SetBool(Constants.AnimationParams.Open, false);
-
         var interactionService = ServiceLoacator.Instance.Get<InteractionService>();
+        
+        _animator.SetBool(Constants.AnimationParams.Open, false);
         interactionService.CancelInteraction();
     }
 }

@@ -20,5 +20,13 @@ public class GameTimer : MonoBehaviour
 
         var currentValue = (_timeInSeconds - _elapsedTime) / _timeInSeconds;
         _slider.value = currentValue;
+
+        if(_timeInSeconds - _elapsedTime <= 0)
+        {
+            var gameMenu = ServiceLoacator.Instance.Get<GameMenu>();
+
+            gameMenu.SetDescription(Lean.Localization.LeanLocalization.GetTranslationText(Constants.Translations.TimeUp));
+            gameMenu.gameObject.SetActive(true);
+        }
     }
 }

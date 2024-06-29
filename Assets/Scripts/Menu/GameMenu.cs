@@ -1,9 +1,12 @@
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameMenu : MonoBehaviour, IService, IWindow
 {
+    [SerializeField] private TMP_Text _description;
+
     private CanvasGroup _canvasGroup;
 
     private void Awake()
@@ -25,6 +28,11 @@ public class GameMenu : MonoBehaviour, IService, IWindow
         Time.timeScale = 0;
     }
 
+    private void OnDisable()
+    {
+        Time.timeScale = 1;
+    }
+
     public void Hide()
     {
         var canvasGroup = ServiceLoacator.Instance.Get<GlobalCanvasGroup>();
@@ -36,8 +44,6 @@ public class GameMenu : MonoBehaviour, IService, IWindow
 
         _canvasGroup.DOFade(0, 0.7f).SetUpdate(true).OnComplete(() =>
         {
-            Time.timeScale = 1;
-
             gameObject.SetActive(false);
         });
     }
@@ -50,5 +56,10 @@ public class GameMenu : MonoBehaviour, IService, IWindow
     public void Exit()
     {
         SceneManager.LoadScene(Constants.SceneIndex.Menu);
+    }
+
+    public void SetDescription(string description)
+    {
+        _description.text = description;
     }
 }

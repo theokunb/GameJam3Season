@@ -43,15 +43,30 @@ public class DoorInteraction : BaseInteraction
 
     private void OnButtonClicked(int value, TerminalButton button)
     {
+        var soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        var goodClick = Resources.Load(Constants.Sounds.ButtonClick) as AudioClip;
+        var wrongClick = Resources.Load(Constants.Sounds.WrongClick) as AudioClip;
+        var success = Resources.Load(Constants.Sounds.Success) as AudioClip;
+
         if (value == _currentValue)
         {
             _currentValue++;
 
             button.SetColor(Constants.TerminalButton.AcceptedColor);
+            soundContainer.Play(goodClick, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.15f;
+            });
         }
         else
         {
             _currentValue = 1;
+            soundContainer.Play(wrongClick, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
 
             foreach (var buttom in _buttons)
             {
@@ -61,6 +76,11 @@ public class DoorInteraction : BaseInteraction
 
         if (_currentValue == _buttons.Length + 1)
         {
+            soundContainer.Play(success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             CompleteAction?.Invoke();
         }
     }

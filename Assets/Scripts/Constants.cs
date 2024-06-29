@@ -19,6 +19,7 @@ public static class Constants
         public static string Open = nameof(Open);
         public static string Speed = nameof(Speed);
         public static string Talk = nameof(Talk);
+        public static string Wrong = nameof(Wrong);
     }
 
     public static class Materials
@@ -57,12 +58,27 @@ public static class Constants
 
     public static class Sounds
     {
-        public static string Asteroids = Path.Combine("Sounds", "Asteroids");
-        public static string Drill = Path.Combine("Sounds", "Drill");
-        public static string Door = Path.Combine("Sounds", "Door");
-        public static string Terminal = Path.Combine("Sounds", "Terminal");
-        public static string Trash = Path.Combine("Sounds", "Trash");
-        public static string Tube = Path.Combine("Sounds", "Tube");
-        public static string Complete = Path.Combine("Sounds", "Complete");
+        public static string Asteroids = Path.Combine("Sounds", "Annonces", "Asteroids");
+        public static string Drill = Path.Combine("Sounds", "Annonces", "Drill");
+        public static string Door = Path.Combine("Sounds", "Annonces", "Door");
+        public static string Terminal = Path.Combine("Sounds", "Annonces", "Terminal");
+        public static string Trash = Path.Combine("Sounds", "Annonces", "Trash");
+        public static string Tube = Path.Combine("Sounds", "Annonces", "Tube");
+        public static string Complete = Path.Combine("Sounds", "Annonces", "Complete");
+
+        public static string MiamiNight = Path.Combine("Sounds", "GameSounds", "miamiNight");
+        public static string DoopOpen = Path.Combine("Sounds", "GameSounds", "doorOpen");
+        public static string ButtonClick = Path.Combine("Sounds", "GameSounds", "ButtonClick");
+        public static string WrongClick = Path.Combine("Sounds", "GameSounds", "wrong");
+        public static string Success = Path.Combine("Sounds", "GameSounds", "success");
+        public static string Sucked = Path.Combine("Sounds", "GameSounds", "trash");
+        public static string AsteroidsDie = Path.Combine("Sounds", "GameSounds", "AsteroidDie");
+
+    }
+
+    public static class Translations
+    {
+        public static string Pause = nameof(Pause);
+        public static string TimeUp = nameof(TimeUp);
     }
 }

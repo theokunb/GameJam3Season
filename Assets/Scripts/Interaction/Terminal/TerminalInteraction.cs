@@ -10,6 +10,9 @@ public class TerminalInteraction : BaseInteraction
 
     private NewInput _input;
     private string _answer;
+    private AudioClip _wrong;
+    private AudioClip _success;
+    private SoundContainer _soundContainer;
 
     private void Awake()
     {
@@ -31,6 +34,13 @@ public class TerminalInteraction : BaseInteraction
         _input.Player.Enter.performed -= OnEnter;
     }
 
+    private void Start()
+    {
+        _soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        _success = Resources.Load(Constants.Sounds.Success) as AudioClip;
+        _wrong = Resources.Load(Constants.Sounds.WrongClick) as AudioClip;
+    }
+
     private void OnClick(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         _answerText.ActivateInputField();
@@ -40,10 +50,20 @@ public class TerminalInteraction : BaseInteraction
     {
         if(_answerText.text.ToLower() == _answer)
         {
+            _soundContainer.Play(_success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             CompleteAction?.Invoke();
         }
         else
         {
+            _soundContainer.Play(_wrong, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             _answerText.text = string.Empty;
         }
 

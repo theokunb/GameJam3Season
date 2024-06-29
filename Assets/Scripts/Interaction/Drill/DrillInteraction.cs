@@ -11,16 +11,21 @@ public class DrillInteraction : BaseInteraction
     [SerializeField] private float maxAngle;
     [SerializeField] private float _time;
 
+    private Animator _animator;
     private NewInput _input;
     private float _currentAngle;
     private int _direction;
     private float _elapsedTime;
+    private SoundContainer _soundContainer;
+    private AudioClip _wrong;
+    private AudioClip _success;
 
     public override event Action<BaseInteraction> OnLose;
 
     private void Awake()
     {
         _input = new NewInput();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -28,6 +33,9 @@ public class DrillInteraction : BaseInteraction
         _direction = 1;
         _currentAngle = 0;
         _elapsedTime = 0;
+        _soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        _wrong = Resources.Load(Constants.Sounds.WrongClick) as AudioClip;
+        _success = Resources.Load(Constants.Sounds.Success) as AudioClip;
     }
 
     private void OnEnable()
@@ -46,7 +54,21 @@ public class DrillInteraction : BaseInteraction
     {
         if(Mathf.Abs(_currentAngle) < 10)
         {
+            _soundContainer.Play(_success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             CompleteAction?.Invoke();
+        }
+        else
+        {
+            _animator.SetTrigger(Constants.AnimationParams.Wrong);
+            _soundContainer.Play(_wrong, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
         }
     }
 

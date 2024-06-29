@@ -22,10 +22,14 @@ public class WindowController : IService
         else
         {
             var gameMenu = ServiceLoacator.Instance.Get<GameMenu>();
-            gameMenu.gameObject.SetActive(true);
-            _windows.Push(gameMenu);
+
+            if (gameMenu.gameObject.activeSelf == false)
+            {
+                gameMenu.gameObject.SetActive(true);
+                gameMenu.SetDescription(Lean.Localization.LeanLocalization.GetTranslationText(Constants.Translations.Pause));
+                _windows.Push(gameMenu);
+            }
         }
-        
     }
 
     public void Push(IWindow window)
@@ -33,7 +37,13 @@ public class WindowController : IService
         _windows.Push(window);
     }
 
-
+    public void Pop()
+    {
+        if (_windows.TryPop(out IWindow window))
+        {
+            window.Hide();
+        }
+    }
 }
 public interface IWindow
 {

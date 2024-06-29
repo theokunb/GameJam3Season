@@ -9,6 +9,9 @@ public class AsteroidsInteraction : BaseInteraction
     [SerializeField] private float _time;
 
     private float _elapsedTime;
+    private AudioClip _success;
+    private AudioClip _lose;
+    private SoundContainer _soundContainer;
 
     public override event Action<BaseInteraction> OnLose;
 
@@ -27,6 +30,13 @@ public class AsteroidsInteraction : BaseInteraction
         _ship.Died -= OnDied;
     }
 
+    private void Start()
+    {
+        _soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        _success = Resources.Load(Constants.Sounds.Success) as AudioClip;
+        _lose = Resources.Load(Constants.Sounds.AsteroidsDie) as AudioClip;
+    }
+
     private void FixedUpdate()
     {
         _elapsedTime += Time.fixedDeltaTime;
@@ -34,12 +44,23 @@ public class AsteroidsInteraction : BaseInteraction
 
         if(_elapsedTime > _time)
         {
+            _soundContainer.Play(_success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             CompleteAction?.Invoke();
+            enabled = false;
         }
     }
 
     private void OnDied()
     {
+        _soundContainer.Play(_lose, conf =>
+        {
+            conf.loop = false;
+            conf.volume = 0.1f;
+        });
         OnLose?.Invoke(this);
     }
 

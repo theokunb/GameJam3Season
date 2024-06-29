@@ -8,6 +8,8 @@ public class TubeInteraction : BaseInteraction
 
     private bool _colliding;
     private bool _completed = false;
+    private AudioClip _success;
+    private SoundContainer _soundContainer;
 
     private void OnEnable()
     {
@@ -19,6 +21,12 @@ public class TubeInteraction : BaseInteraction
     {
         _crack.Collided -= OnCrackCollided;
         _crack.ColliderExited -= OnColliderExited;
+    }
+
+    private void Start()
+    {
+        _soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        _success = Resources.Load(Constants.Sounds.Success) as AudioClip;
     }
 
     private void Update()
@@ -42,6 +50,11 @@ public class TubeInteraction : BaseInteraction
 
         if (_progress.fillAmount == 1 && _completed == false)
         {
+            _soundContainer.Play(_success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
             _completed = true;
             CompleteAction?.Invoke();
         }

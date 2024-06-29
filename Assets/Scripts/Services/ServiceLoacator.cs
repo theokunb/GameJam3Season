@@ -9,7 +9,10 @@ public class ServiceLoacator : MonoBehaviour
     [SerializeField] private GameUI _gameUI;
     [SerializeField] private DialogService _dialogService;
     [SerializeField] private Player _player;
+    [SerializeField] private BadService _badService;
     [SerializeField] private GameMenu _gameMenu;
+    [SerializeField] private FinishService _finishService;
+    [SerializeField] private SoundContainer _soundContainer;
 
     public static ServiceLoacator Instance { get; private set; }
 
@@ -38,6 +41,9 @@ public class ServiceLoacator : MonoBehaviour
         Instance.Register(_player);
         Instance.Register(windowController);
         Instance.Register(_gameMenu);
+        Instance.Register(_finishService);
+        Instance.Register(_soundContainer);
+        Instance.Register(_badService);
     }
 
     public T Register<T>(T service) where T : IService

@@ -13,6 +13,13 @@ public class Score : IInteractionVisitor, IService
         {
             _currentScore = value;
             ScoreChanged?.Invoke(CurrentScore);
+
+            if(CurrentScore >= 1)
+            {
+                var finishService = ServiceLoacator.Instance.Get<FinishService>();
+
+                finishService.RaiseEvent();
+            }
         }
     }
 
@@ -25,7 +32,7 @@ public class Score : IInteractionVisitor, IService
 
     public void Visit(AsteroidsInteraction interaction)
     {
-        CurrentScore += 2 * Point;
+        CurrentScore += 11 * Point;
     }
 
     public void Visit(AsteroidsViewInteraction interaction)
@@ -34,17 +41,17 @@ public class Score : IInteractionVisitor, IService
 
     public void Visit(DoorInteraction interaction)
     {
-        CurrentScore += Point;
+        CurrentScore += 3 * Point;
     }
 
     public void Visit(DrillInteraction interaction)
     {
-        CurrentScore += 2 * Point;
+        CurrentScore += 8 * Point;
     }
 
     public void Visit(TerminalInteraction interaction)
     {
-        CurrentScore += 3 * Point;
+        CurrentScore += 10 * Point;
     }
 
     public void Visit(TerminalViewInteraction interaction)
@@ -53,11 +60,11 @@ public class Score : IInteractionVisitor, IService
 
     public void Visit(TrashInteraction interaction)
     {
-        CurrentScore += 2 * Point;
+        CurrentScore += 8 * Point;
     }
 
     public void Visit(TubeInteraction interaction)
     {
-        CurrentScore += 2 * Point;
+        CurrentScore += 12 * Point;
     }
 }

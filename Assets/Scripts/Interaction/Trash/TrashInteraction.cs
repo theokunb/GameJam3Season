@@ -8,6 +8,8 @@ public class TrashInteraction : BaseInteraction
     
     private TrashElement[] _trashes;
     private int _cleaned;
+    private SoundContainer _soundContainer;
+    private AudioClip _audioClip;
 
     private void Awake()
     {
@@ -33,6 +35,12 @@ public class TrashInteraction : BaseInteraction
         }
     }
 
+    private void Start()
+    {
+        _soundContainer = ServiceLoacator.Instance.Get<SoundContainer>();
+        _audioClip = Resources.Load(Constants.Sounds.Sucked) as AudioClip;
+    }
+
     private void OnTrashClick(TrashElement trash)
     {
         var x = Random.Range(-_xRandom, _xRandom);
@@ -46,8 +54,22 @@ public class TrashInteraction : BaseInteraction
         trash.Cleaned -= OnTrashCleaned;
         _cleaned++;
 
+        _soundContainer.Play(_audioClip, conf =>
+        {
+            conf.loop = false;
+            conf.volume = 0.1f;
+        });
+
         if(_cleaned == _trashes.Length)
         {
+            var success = Resources.Load(Constants.Sounds.Success) as AudioClip;
+
+            _soundContainer.Play(success, conf =>
+            {
+                conf.loop = false;
+                conf.volume = 0.1f;
+            });
+
             CompleteAction?.Invoke();
         }
     }
