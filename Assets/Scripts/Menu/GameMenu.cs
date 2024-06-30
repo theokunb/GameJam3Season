@@ -3,13 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameMenu : MonoBehaviour, IService, IWindow
+public class GameMenu : OrderedMonobeh, IService, IWindow
 {
     [SerializeField] private TMP_Text _description;
 
     private CanvasGroup _canvasGroup;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _canvasGroup = GetComponent<CanvasGroup>();
     }

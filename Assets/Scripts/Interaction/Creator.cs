@@ -23,14 +23,14 @@ public abstract class Creator<T> : IService, IWindow where T : Component
         instance.transform.position -= new Vector3(0, Screen.height, 0);
         float targetPostion = instance.transform.position.y + Screen.height;
 
-        instance.transform.DOMoveY(targetPostion, 0.7f).OnComplete(() =>
+        instance.transform.DOMoveY(targetPostion, 0.7f).SetUpdate(true).OnComplete(() =>
         {
             AfterCreate();
         });
 
         var mainCanvasGroup = ServiceLoacator.Instance.Get<GlobalCanvasGroup>();
         mainCanvasGroup.CanvasGroup.alpha = 0;
-        mainCanvasGroup.CanvasGroup.DOFade(0.65f, 0.7f);
+        mainCanvasGroup.CanvasGroup.DOFade(0.65f, 0.7f).SetUpdate(true);
 
         var player = ServiceLoacator.Instance.Get<Player>();
         player.enabled = false;
@@ -50,9 +50,9 @@ public abstract class Creator<T> : IService, IWindow where T : Component
 
         var mainCanvasGroup = ServiceLoacator.Instance.Get<GlobalCanvasGroup>();
         mainCanvasGroup.CanvasGroup.alpha = 0.65f;
-        mainCanvasGroup.CanvasGroup.DOFade(0f, 0.5f);
+        mainCanvasGroup.CanvasGroup.DOFade(0f, 0.5f).SetUpdate(true);
         OnHiding();
-        CurrentInteraction?.transform.DOMoveY(-Screen.height, 0.7f).OnComplete(() =>
+        CurrentInteraction?.transform.DOMoveY(-Screen.height, 0.7f).SetUpdate(true).OnComplete(() =>
         {
             var interactionService = ServiceLoacator.Instance.Get<InteractionService>();
             interactionService.Free();

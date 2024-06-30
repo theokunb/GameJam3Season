@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IService
+public class Player : OrderedMonobeh, IService
 {
     [SerializeField] private float _speed;
 
@@ -10,7 +10,7 @@ public class Player : MonoBehaviour, IService
     private NewInput _input;
     private Rigidbody _rigidBody;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _input = new NewInput();
         _rigidBody = GetComponent<Rigidbody>();

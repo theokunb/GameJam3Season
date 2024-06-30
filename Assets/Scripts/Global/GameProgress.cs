@@ -1,13 +1,11 @@
-using UnityEngine;
 using UnityEngine.UI;
 
-public class GameProgress : MonoBehaviour, IService
+public class GameProgress : OrderedMonobeh, IService
 {
     private Slider _slider;
     private Score _score;
 
-
-    private void Awake()
+    public override void OrderedAwake()
     {
         _slider = GetComponent<Slider>();
     }

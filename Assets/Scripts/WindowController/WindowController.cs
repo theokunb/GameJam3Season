@@ -44,6 +44,12 @@ public class WindowController : IService
             window.Hide();
         }
     }
+
+    public void Unsubscribe()
+    {
+        _intup.Disable();
+        _intup.Player.Escape.performed -= OnEscape;
+    }
 }
 public interface IWindow
 {

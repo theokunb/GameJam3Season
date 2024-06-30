@@ -2,11 +2,11 @@ using System;
 using System.Linq;
 using UnityEngine;
 
-public class SoundContainer : MonoBehaviour, IService
+public class SoundContainer : OrderedMonobeh, IService
 {
     private AudioSource[] _audiSources;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _audiSources = GetComponentsInChildren<AudioSource>();
     }

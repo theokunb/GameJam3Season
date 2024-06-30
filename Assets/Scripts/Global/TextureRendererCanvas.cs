@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class TextureRendererCanvas : MonoBehaviour, IService
+public class TextureRendererCanvas : OrderedMonobeh, IService
 {
     private Canvas _canvas;
 
     public Canvas Canvas => _canvas;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _canvas = GetComponent<Canvas>();
     }

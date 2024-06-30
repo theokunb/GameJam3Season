@@ -11,8 +11,6 @@ public class GameUI : MonoBehaviour, IService
     private const float InteractImageAnimationTime = 0.5f;
     private TweenerCore<Vector3, Vector3, VectorOptions> _interactScaleAnimation;
 
-
-
     public void ShowInteractButton()
     {
         _interactImage.gameObject.SetActive(true);

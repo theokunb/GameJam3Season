@@ -1,11 +1,11 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Canvas))]
-public class GlobalCanvas : MonoBehaviour, IService
+public class GlobalCanvas : OrderedMonobeh, IService
 {
     private Canvas _canvas;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _canvas = GetComponent<Canvas>();
     }

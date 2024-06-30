@@ -1,14 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameTimer : MonoBehaviour, IService
+public class GameTimer : OrderedMonobeh, IService
 {
     [SerializeField] private float _timeInSeconds;
 
     private float _elapsedTime;
     private Slider _slider;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _slider = GetComponent<Slider>();
         _elapsedTime = 0;

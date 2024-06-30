@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ServiceLoacator : MonoBehaviour
+public class ServiceLoacator : OrderedMonobeh
 {
     [SerializeField] private GlobalCanvasGroup _mainCanvasGroup;
     [SerializeField] private GlobalCanvas _mainCanvas;
@@ -21,7 +21,7 @@ public class ServiceLoacator : MonoBehaviour
 
     private Dictionary<string, IService> _services;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         Instance = this;
         _services = new Dictionary<string, IService>();
@@ -50,6 +50,14 @@ public class ServiceLoacator : MonoBehaviour
         Instance.Register(_gameTimer);
         Instance.Register(_navigationService);
         Instance.Register(_gameProgress);
+    }
+
+    private void OnDestroy()
+    {
+        var windowController = Instance.Get<WindowController>();
+        windowController.Unsubscribe();
+
+        _services.Clear();
     }
 
     public T Register<T>(T service) where T : IService

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogService : MonoBehaviour, IService
+public class DialogService : OrderedMonobeh, IService
 {
     [SerializeField] private Animator _captainAnimator;
     [SerializeField] private Animator _cadetAnimator;
@@ -15,7 +15,7 @@ public class DialogService : MonoBehaviour, IService
 
     public bool IsPlaying => _audioSource.isPlaying || _actionQueue.Count > 0;
 
-    private void Awake()
+    public override void OrderedAwake()
     {
         _audioSource = GetComponent<AudioSource>();
         _actionQueue = new Queue<IEnumerator>();
