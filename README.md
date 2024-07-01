@@ -1,3 +1,3 @@
-Соло проект.
-Игра для участия во всеросийском гейм джеме
-ссылка на билд: https://ims.cr5.space/app/p/5c6WwQum/captain-space-cat/about
+**Соло проект**
+>Игра для участия во всеросийском гейм джеме от 28.06.2024 по 01.07.2024
+[ссылка на билд](https://ims.cr5.space/app/p/5c6WwQum/captain-space-cat/about)
